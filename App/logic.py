@@ -151,7 +151,7 @@ def load_books_tags(catalog, filename):
 
 # Funciones de consulta
 
-
+#prueba 1
 def book_size(catalog):
     """
     Obtiene el tamaño del conjunto de libros.
