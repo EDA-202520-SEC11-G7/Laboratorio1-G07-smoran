@@ -148,8 +148,6 @@ def load_books_tags(catalog, filename):
         return 0
     else:
         return set.size(catalog.get("book_tags"))
-    
-
 
 # Funciones de consulta
 
