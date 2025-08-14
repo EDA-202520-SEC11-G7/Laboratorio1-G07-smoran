@@ -27,7 +27,8 @@
  """
 
 import os
-
+#csv import necesario para leer los archivos (mod)
+import csv
 
 # Importar el modulo de la estructura de datos set
 from DataStructures import set as set
@@ -122,7 +123,7 @@ def load_tags(catalog, filename):
         return set.size(tags)
 
 
-def load_books_tags(catalog, filename):
+def load_books_tags(catalog: dict, filename: str) -> int:
     """
     Carga los tags de los libros del archivo y los agrega a la lista
     de tags. Siga el mismo procedimiento que en la carga de libros.
@@ -140,8 +141,17 @@ def load_books_tags(catalog, filename):
     # La función debe recibir el catalogo y el nombre del archivo csv con los tags de los libros.
     # La función debe cargar los tags de los libros del archivo y los agregar al conjunto book_tags del catalogo.
     # La función debe retornar el tamaño del conjunto de tags de los libros.
-    pass
+    book_tags = set()
+    
+    with open(filename, mode='r', encoding='utf-8') as file: # Abrir el archivo CSV
+        reader = csv.DictReader(file) # Leer el archivo CSV como un diccionario
+        for row in reader: # Iterar sobre cada fila del archivo
+            book_id = int(row['Goodreads_book_id']) # Convertir el book_id a int
+            tag_id = int(row['Tag_id']) # Convertir el tag_id a int
+            book_tags.add((book_id, tag_id)) # Agregar el par (book_id, tag_id) al conjunto
 
+    catalog["book_tags"] = book_tags #guardar el conjunto en el catalogo
+    return len(book_tags) 
 # Funciones de consulta
 
 
